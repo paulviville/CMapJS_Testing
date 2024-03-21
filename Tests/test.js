@@ -568,26 +568,29 @@ function TestOps() {
 	 * Displays formated results log of the test.
 	 */
 	this.showLog = function() {
+		const green = "color:green";
+		const red = "color:red";
+
 		buffer.forEach(b => {
 			switch(b.type){
 				case ASSERTFAIL:
-					console.log("%c\u2718 " + b.id + "/" + counter, "color:red");
+					console.log(`%c\u2718 ${b.id} / ${counter}`, red);
 					console.error(b.result);
 					break;
 				case ASSERTSUCCESS:
-					console.log("%c\u2714 " + b.id + "/" + counter + " " + b.result, "color:green");
+					console.log(`%c\u2714 ${b.id} / ${counter} ${b.result}`, green);
 					break;
 				case EXPECTFAIL:
-					console.log("%c\u2718 " + b.id + "/" + counter, "color:red");
+					console.log(`%c\u2718 ${b.id} / ${counter}`, red);
 					console.warn(b.result);
 					break;
 				case EXPECTSUCCESS:
-					console.log("%c\u2714 " + b.id + "/" + counter + " " + b.result, "color:green");
+					console.log(`%c\u2714 ${b.id} / ${counter} ${b.result}`, green);
 					break;
 				default:
 			}
 		});
 
-		console.log("%cSuccess: " + (counter - failures) + "/" + counter, "font-weight:bold; color:" + ((failures == 0) ? "green":"red"));
+		console.log(`%cSuccess: ${counter - failures} / ${counter}`, `font-weight:bold; ${failures ? red : green}`);
 	}
 }
